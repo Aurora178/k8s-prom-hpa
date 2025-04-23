@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inforsuiteas
+spec:
+  selector:
+    matchLabels:
+      app: inforsuiteas
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: inforsuiteas
+      annotations:
+        prometheus.io/scrape: "true"
+    spec:
+      containers:
+        - name: inforsuiteas
+          image: 192.168.53.141:5000/asmetrics:v5.3
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: metadata
+              mountPath: /opt/AS/metadata
+              readOnly: true
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8060
+              protocol: TCP
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "256m"
+            limits:
+              memory: "512Mi"
+              cpu: "512m"
+      volumes:
+        - name: metadata
+          downwardAPI:
+            items:
+              - path: "labels"
+                fieldRef:
+                  fieldPath: metadata.labels
+              - path: "annotations"
+                fieldRef:
+                  fieldPath: metadata.annotations

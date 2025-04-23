@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inforsuiteas
+  labels:
+    app: inforsuiteas
+spec:
+  type: NodePort
+  ports:
+    - name: http-port  # 为8080端口添加一个名称
+      port: 8080
+      targetPort: 8080
+      nodePort: 31198
+      protocol: TCP
+    - name: console-port  # 为8060端口添加一个名称
+      port: 8060
+      targetPort: 8060
+      nodePort: 31199
+      protocol: TCP
+  selector:
+    app: inforsuiteas
