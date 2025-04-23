@@ -1,3 +1,5 @@
+### 这个文件是kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1" | jq . > output.json执行的结果
+
 {
   "kind": "APIResourceList",
   "apiVersion": "v1",
