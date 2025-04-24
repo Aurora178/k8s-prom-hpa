@@ -352,3 +352,5 @@ backends require autoscaling based on requests per second to handle any traffic 
 For ETL apps, auto scaling could be triggered by the job queue length exceeding some threshold and so on. 
 By instrumenting your applications with Prometheus and exposing the right metrics for autoscaling you can 
 fine tune your apps to better handle bursts and ensure high availability.
+
+注意：部署yaml时需要注意镜像本地仓库是否存在。
